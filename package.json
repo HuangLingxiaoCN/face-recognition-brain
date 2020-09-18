@@ -14,6 +14,7 @@
     "react-tilt": "^0.1.4",
     "tachyons": "^4.12.0"
   },
+  "homepage": "https://JasonHuang1213.github.io/face-recognition",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
@@ -37,7 +38,6 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://JasonHuang1213.github.io/face-recognition",
   "devDependencies": {
     "gh-pages": "^3.1.0"
   }
