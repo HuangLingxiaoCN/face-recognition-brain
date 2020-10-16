@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
-import Clarifai from 'clarifai';
 import Navigation from './components/Navigation/Navigation'
 import Signin from './components/Signin/Signin';
 import Register from './components/Register/Register';
@@ -9,12 +7,8 @@ import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Rank from './components/Rank/Rank';
 import Particles from 'react-particles-js';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
+import './App.css';
 
-
-// Clarifai API
-const app = new Clarifai.App({
-  apiKey: 'c74f2542caa64d79990afffe266ef392'
-});
 
 // From particles.js documentations
 const particlesOptions = {
@@ -88,12 +82,14 @@ class App extends Component {
   /* Set imageUrl to be this.state.input*/
   onButtonSubmit = () => {
     this.setState({imageUrl: this.state.input});
-
-    // Using clarifai API
-    app.models.predict(
-      Clarifai.FACE_DETECT_MODEL
-      /* here should be input not imageUrl*/
-      ,this.state.input)
+    fetch('http://localhost:3001/imageurl', {
+      method: 'post',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        input: this.state.input
+      })
+    })
+    .then(response => response.json())
     .then(response => {
       if(response){
         fetch('http://localhost:3001/image', {
